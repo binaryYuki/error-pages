@@ -5,7 +5,7 @@ import (
 
 	"github.com/valyala/fasthttp"
 
-	"gh.tarampamp.am/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/logger"
 )
 
 // New creates a middleware that logs every incoming request.

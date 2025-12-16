@@ -6,8 +6,8 @@ import (
 
 	"github.com/urfave/cli/v3"
 
-	"gh.tarampamp.am/error-pages/internal/cli/shared"
-	"gh.tarampamp.am/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/cli/shared"
+	"github.com/binaryYuki/error-pages/internal/logger"
 )
 
 type checker interface {

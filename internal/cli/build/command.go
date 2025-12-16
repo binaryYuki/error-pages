@@ -15,10 +15,10 @@ import (
 
 	"github.com/urfave/cli/v3"
 
-	"gh.tarampamp.am/error-pages/internal/cli/shared"
-	"gh.tarampamp.am/error-pages/internal/config"
-	"gh.tarampamp.am/error-pages/internal/logger"
-	appTemplate "gh.tarampamp.am/error-pages/internal/template"
+	"github.com/binaryYuki/error-pages/internal/cli/shared"
+	"github.com/binaryYuki/error-pages/internal/config"
+	"github.com/binaryYuki/error-pages/internal/logger"
+	appTemplate "github.com/binaryYuki/error-pages/internal/template"
 )
 
 //go:embed index.html

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"gh.tarampamp.am/error-pages/internal/appmeta"
+	"github.com/binaryYuki/error-pages/internal/appmeta"
 )
 
 type (

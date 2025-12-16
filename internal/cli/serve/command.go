@@ -10,10 +10,10 @@ import (
 
 	"github.com/urfave/cli/v3"
 
-	"gh.tarampamp.am/error-pages/internal/cli/shared"
-	"gh.tarampamp.am/error-pages/internal/config"
-	appHttp "gh.tarampamp.am/error-pages/internal/http"
-	"gh.tarampamp.am/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/cli/shared"
+	"github.com/binaryYuki/error-pages/internal/config"
+	appHttp "github.com/binaryYuki/error-pages/internal/http"
+	"github.com/binaryYuki/error-pages/internal/logger"
 )
 
 type command struct {

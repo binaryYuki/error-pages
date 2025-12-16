@@ -8,7 +8,7 @@ import (
 
 	"github.com/urfave/cli/v3"
 
-	"gh.tarampamp.am/error-pages/internal/config"
+	"github.com/binaryYuki/error-pages/internal/config"
 )
 
 const (

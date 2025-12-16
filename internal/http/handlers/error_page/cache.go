@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"gh.tarampamp.am/error-pages/internal/template"
+	"github.com/binaryYuki/error-pages/internal/template"
 )
 
 type (

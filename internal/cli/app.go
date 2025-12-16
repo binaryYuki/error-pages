@@ -8,12 +8,12 @@ import (
 
 	"github.com/urfave/cli/v3"
 
-	"gh.tarampamp.am/error-pages/internal/appmeta"
-	"gh.tarampamp.am/error-pages/internal/cli/build"
-	"gh.tarampamp.am/error-pages/internal/cli/healthcheck"
-	"gh.tarampamp.am/error-pages/internal/cli/perftest"
-	"gh.tarampamp.am/error-pages/internal/cli/serve"
-	"gh.tarampamp.am/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/appmeta"
+	"github.com/binaryYuki/error-pages/internal/cli/build"
+	"github.com/binaryYuki/error-pages/internal/cli/healthcheck"
+	"github.com/binaryYuki/error-pages/internal/cli/perftest"
+	"github.com/binaryYuki/error-pages/internal/cli/serve"
+	"github.com/binaryYuki/error-pages/internal/logger"
 )
 
 //go:generate go run update_readme.go

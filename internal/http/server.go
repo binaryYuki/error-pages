@@ -11,14 +11,14 @@ import (
 
 	"github.com/valyala/fasthttp"
 
-	"gh.tarampamp.am/error-pages/internal/appmeta"
-	"gh.tarampamp.am/error-pages/internal/config"
-	ep "gh.tarampamp.am/error-pages/internal/http/handlers/error_page"
-	"gh.tarampamp.am/error-pages/internal/http/handlers/live"
-	"gh.tarampamp.am/error-pages/internal/http/handlers/static"
-	"gh.tarampamp.am/error-pages/internal/http/handlers/version"
-	"gh.tarampamp.am/error-pages/internal/http/middleware/logreq"
-	"gh.tarampamp.am/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/appmeta"
+	"github.com/binaryYuki/error-pages/internal/config"
+	ep "github.com/binaryYuki/error-pages/internal/http/handlers/error_page"
+	"github.com/binaryYuki/error-pages/internal/http/handlers/live"
+	"github.com/binaryYuki/error-pages/internal/http/handlers/static"
+	"github.com/binaryYuki/error-pages/internal/http/handlers/version"
+	"github.com/binaryYuki/error-pages/internal/http/middleware/logreq"
+	"github.com/binaryYuki/error-pages/internal/logger"
 )
 
 // Server is an HTTP server for serving error pages.
