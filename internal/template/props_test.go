@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"gh.tarampamp.am/error-pages/internal/template"
+	"github.com/binaryYuki/error-pages/internal/template"
 )
 
 func TestProps_Values(t *testing.T) {
@@ -15,28 +15,17 @@ func TestProps_Values(t *testing.T) {
 		Code:               1,
 		Message:            "b",
 		Description:        "c",
-		OriginalURI:        "d",
-		Namespace:          "e",
-		IngressName:        "f",
-		ServiceName:        "g",
-		ServicePort:        "h",
-		RequestID:          "i",
-		ForwardedFor:       "j",
-		L10nDisabled:       true,
+		RequestID:          "d",
+		Host:               "e",
 		ShowRequestDetails: false,
+		L10nDisabled:       true,
 	}.Values(), map[string]any{
 		"code":          uint16(1),
 		"message":       "b",
 		"description":   "c",
-		"original_uri":  "d",
-		"namespace":     "e",
-		"ingress_name":  "f",
-		"service_name":  "g",
-		"service_port":  "h",
-		"request_id":    "i",
-		"forwarded_for": "j",
-		"host":          "", // empty because it's not set
-		"l10n_disabled": true,
+		"request_id":    "d",
+		"host":          "e",
 		"show_details":  false,
+		"l10n_disabled": true,
 	})
 }

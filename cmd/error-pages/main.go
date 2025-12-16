@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"syscall"
 
-	"gh.tarampamp.am/error-pages/internal/cli"
+	"github.com/binaryYuki/error-pages/internal/cli"
 )
 
 // main CLI application entrypoint.

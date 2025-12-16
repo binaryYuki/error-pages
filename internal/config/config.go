@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"slices"
 
-	builtinTemplates "gh.tarampamp.am/error-pages/templates"
+	builtinTemplates "github.com/binaryYuki/error-pages/templates"
 )
 
 type Config struct {
@@ -68,12 +68,6 @@ const defaultJSONFormat string = `{
   "description": {{ description | json }}{{ if show_details }},
   "details": {
     "host": {{ host | json }},
-    "original_uri": {{ original_uri | json }},
-    "forwarded_for": {{ forwarded_for | json }},
-    "namespace": {{ namespace | json }},
-    "ingress_name": {{ ingress_name | json }},
-    "service_name": {{ service_name | json }},
-    "service_port": {{ service_port | json }},
     "request_id": {{ request_id | json }},
     "timestamp": {{ nowUnix }}
   }{{ end }}
@@ -87,12 +81,6 @@ const defaultXMLFormat string = `<?xml version="1.0" encoding="utf-8"?>
   <description>{{ description }}</description>{{ if show_details }}
   <details>
     <host>{{ host }}</host>
-    <originalURI>{{ original_uri }}</originalURI>
-    <forwardedFor>{{ forwarded_for }}</forwardedFor>
-    <namespace>{{ namespace }}</namespace>
-    <ingressName>{{ ingress_name }}</ingressName>
-    <serviceName>{{ service_name }}</serviceName>
-    <servicePort>{{ service_port }}</servicePort>
     <requestID>{{ request_id }}</requestID>
     <timestamp>{{ nowUnix }}</timestamp>
   </details>{{ end }}
@@ -103,12 +91,6 @@ const defaultPlainTextFormat string = `Error {{ code }}: {{ message }}{{ if desc
 {{ description }}{{ end }}{{ if show_details }}
 
 Host: {{ host }}
-Original URI: {{ original_uri }}
-Forwarded For: {{ forwarded_for }}
-Namespace: {{ namespace }}
-Ingress Name: {{ ingress_name }}
-Service Name: {{ service_name }}
-Service Port: {{ service_port }}
 Request ID: {{ request_id }}
 Timestamp: {{ nowUnix }}{{ end }}
 ` // an empty line at the end is important for better UX

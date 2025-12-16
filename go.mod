@@ -1,10 +1,10 @@
-module gh.tarampamp.am/error-pages
+module github.com/binaryYuki/error-pages
 
 go 1.25
 
 require (
 	github.com/stretchr/testify v1.11.1
-	github.com/tdewolff/minify/v2 v2.24.7
+	github.com/tdewolff/minify/v2 v2.24.8
 	github.com/urfave/cli-docs/v3 v3.1.0
 	github.com/urfave/cli/v3 v3.6.1
 	github.com/valyala/fasthttp v1.68.0
@@ -12,9 +12,10 @@ require (
 
 require (
 	github.com/andybalholm/brotli v1.2.0 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/klauspost/compress v1.18.1 // indirect
+	github.com/google/uuid v1.6.0 // indirect
+	github.com/klauspost/compress v1.18.2 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect

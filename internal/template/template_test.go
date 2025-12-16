@@ -9,9 +9,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"gh.tarampamp.am/error-pages/internal/appmeta"
-	"gh.tarampamp.am/error-pages/internal/template"
-	"gh.tarampamp.am/error-pages/l10n"
+	"github.com/binaryYuki/error-pages/internal/appmeta"
+	"github.com/binaryYuki/error-pages/internal/template"
+	"github.com/binaryYuki/error-pages/l10n"
 )
 
 func TestRender_BuiltInFunction(t *testing.T) {
@@ -132,13 +132,7 @@ func TestRender(t *testing.T) {
 				Code:               404,
 				Message:            "Not found",
 				Description:        "Blah",
-				OriginalURI:        "/test",
-				Namespace:          "default",
-				IngressName:        "test-ingress",
-				ServiceName:        "test-service",
-				ServicePort:        "80",
 				RequestID:          "123456",
-				ForwardedFor:       "123.123.123.123:321",
 				Host:               "test-host",
 				ShowRequestDetails: true,
 				L10nDisabled:       false,
@@ -148,13 +142,7 @@ func TestRender(t *testing.T) {
 				code: {{code}}
 				message: {{message}}
 				description: {{description}}
-				original_uri: {{original_uri}}
-				namespace: {{namespace}}
-				ingress_name: {{ingress_name}}
-				service_name: {{service_name}}
-				service_port: {{service_port}}
 				request_id: {{request_id}}
-				forwarded_for: {{forwarded_for}}
 				host: {{host}}
 				show_details: {{show_details}}
 				l10n_disabled: {{l10n_disabled}}
@@ -163,13 +151,7 @@ func TestRender(t *testing.T) {
 				.Code: {{ .Code }}
 				.Message: {{ .Message }}
 				.Description: {{ .Description }}
-				.OriginalURI: {{ .OriginalURI }}
-				.Namespace: {{ .Namespace }}
-				.IngressName: {{ .IngressName }}
-				.ServiceName: {{ .ServiceName }}
-				.ServicePort: {{ .ServicePort }}
 				.RequestID: {{ .RequestID }}
-				.ForwardedFor: {{ .ForwardedFor }}
 				.Host: {{ .Host }}
 				.ShowRequestDetails: {{ .ShowRequestDetails }}
 				.L10nDisabled: {{ .L10nDisabled }}
@@ -183,13 +165,7 @@ func TestRender(t *testing.T) {
 				code: 404
 				message: Not found
 				description: Blah
-				original_uri: /test
-				namespace: default
-				ingress_name: test-ingress
-				service_name: test-service
-				service_port: 80
 				request_id: 123456
-				forwarded_for: 123.123.123.123:321
 				host: test-host
 				show_details: true
 				l10n_disabled: false
@@ -198,13 +174,7 @@ func TestRender(t *testing.T) {
 				.Code: 404
 				.Message: Not found
 				.Description: Blah
-				.OriginalURI: /test
-				.Namespace: default
-				.IngressName: test-ingress
-				.ServiceName: test-service
-				.ServicePort: 80
 				.RequestID: 123456
-				.ForwardedFor: 123.123.123.123:321
 				.Host: test-host
 				.ShowRequestDetails: true
 				.L10nDisabled: false

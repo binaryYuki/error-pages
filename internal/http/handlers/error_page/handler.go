@@ -1,18 +1,23 @@
 package error_page
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/valyala/fasthttp"
 
-	"gh.tarampamp.am/error-pages/internal/config"
-	"gh.tarampamp.am/error-pages/internal/logger"
-	"gh.tarampamp.am/error-pages/internal/template"
+	"github.com/binaryYuki/error-pages/internal/config"
+	"github.com/binaryYuki/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/template"
 )
 
 // New creates a new handler that returns an error page with the specified status code and format.
@@ -109,16 +114,9 @@ func New(cfg *config.Config, log *logger.Logger) (_ fasthttp.RequestHandler, clo
 			L10nDisabled:       cfg.L10n.Disable, // status description
 		}
 
-		//nolint:lll
-		if cfg.ShowDetails { // https://kubernetes.github.io/ingress-nginx/user-guide/custom-errors/
-			tplProps.OriginalURI = string(reqHeaders.Peek("X-Original-URI"))   // (ingress-nginx) URI that caused the error
-			tplProps.Namespace = string(reqHeaders.Peek("X-Namespace"))        // (ingress-nginx) namespace where the backend Service is located
-			tplProps.IngressName = string(reqHeaders.Peek("X-Ingress-Name"))   // (ingress-nginx) name of the Ingress where the backend is defined
-			tplProps.ServiceName = string(reqHeaders.Peek("X-Service-Name"))   // (ingress-nginx) name of the Service backing the backend
-			tplProps.ServicePort = string(reqHeaders.Peek("X-Service-Port"))   // (ingress-nginx) port number of the Service backing the backend
-			tplProps.RequestID = string(reqHeaders.Peek("X-Request-Id"))       // (ingress-nginx) unique ID that identifies the request - same as for backend service
-			tplProps.ForwardedFor = string(reqHeaders.Peek("X-Forwarded-For")) // the value of the `X-Forwarded-For` header
-			tplProps.Host = string(reqHeaders.Peek("Host"))                    // the value of the `Host` header
+		if cfg.ShowDetails {
+			tplProps.Host = string(reqHeaders.Peek("Host")) // the value of the `Host` header
+			tplProps.RequestID = generateRequestID(reqHeaders)
 		}
 
 		// try to find the code message and description in the config and if not - use the standard status text or fallback
@@ -282,4 +280,40 @@ func write[T string | []byte](ctx *fasthttp.RequestCtx, log *logger.Logger, cont
 			logger.Error(err),
 		)
 	}
+}
+
+// generateRequestID generates a unique request ID.
+// If upstream has X-Request-Id or X-RequestID header, use {SERVER_ICAO}-{value}.
+// Otherwise generate {SERVER_ICAO}-{random 5 bytes hex}-{uuidv7 without dashes}.
+func generateRequestID(reqHeaders *fasthttp.RequestHeader) string {
+	serverICAO := os.Getenv("DATA_CENTRE_CODE")
+	if serverICAO == "" {
+		serverICAO = "CYK2"
+	}
+
+	// Check for upstream request ID headers
+	if upstreamID := reqHeaders.Peek("X-Request-Id"); len(upstreamID) > 0 {
+		return serverICAO + "-" + string(upstreamID)
+	}
+	if upstreamID := reqHeaders.Peek("X-RequestID"); len(upstreamID) > 0 {
+		return serverICAO + "-" + string(upstreamID)
+	}
+
+	// Generate new request ID: {SERVER_ICAO}-{random 5 bytes hex}-{uuidv7 without dashes}
+	randomBytes := make([]byte, 5)
+	if _, err := rand.Read(randomBytes); err != nil {
+		// fallback to a simple random string if crypto/rand fails
+		randomBytes = []byte{0x00, 0x00, 0x00, 0x00, 0x00}
+	}
+	randomHex := hex.EncodeToString(randomBytes)
+
+	// Generate UUID v7 and remove dashes
+	uuidV7, err := uuid.NewV7()
+	if err != nil {
+		// fallback to UUID v4 if v7 fails
+		uuidV7 = uuid.New()
+	}
+	uuidStr := strings.ReplaceAll(uuidV7.String(), "-", "")
+
+	return serverICAO + "-" + randomHex + "-" + uuidStr
 }

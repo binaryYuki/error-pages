@@ -11,8 +11,8 @@ import (
 	"text/template"
 	"time"
 
-	"gh.tarampamp.am/error-pages/internal/appmeta"
-	"gh.tarampamp.am/error-pages/l10n"
+	"github.com/binaryYuki/error-pages/internal/appmeta"
+	"github.com/binaryYuki/error-pages/l10n"
 )
 
 var builtInFunctions = template.FuncMap{ //nolint:gochecknoglobals

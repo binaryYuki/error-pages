@@ -12,9 +12,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"gh.tarampamp.am/error-pages/internal/config"
-	appHttp "gh.tarampamp.am/error-pages/internal/http"
-	"gh.tarampamp.am/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/config"
+	appHttp "github.com/binaryYuki/error-pages/internal/http"
+	"github.com/binaryYuki/error-pages/internal/logger"
 )
 
 // TestRouting in fact is a test for the whole server, because it tests all the routes and their handlers.
@@ -31,12 +31,6 @@ func TestRouting(t *testing.T) {
 
 	<pre>
 		Host: {{ host }}
-		Original URI: {{ original_uri }}
-		Forwarded For: {{ forwarded_for }}
-		Namespace: {{ namespace }}
-		Ingress Name: {{ ingress_name }}
-		Service Name: {{ service_name }}
-		Service Port: {{ service_port }}
 		Request ID: {{ request_id }}
 		Timestamp: {{ nowUnix }}
 	</pre>{{ end }}

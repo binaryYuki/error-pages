@@ -7,10 +7,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"gh.tarampamp.am/error-pages/internal/config"
-	"gh.tarampamp.am/error-pages/internal/http/handlers/error_page"
-	"gh.tarampamp.am/error-pages/internal/http/httptest"
-	"gh.tarampamp.am/error-pages/internal/logger"
+	"github.com/binaryYuki/error-pages/internal/config"
+	"github.com/binaryYuki/error-pages/internal/http/handlers/error_page"
+	"github.com/binaryYuki/error-pages/internal/http/httptest"
+	"github.com/binaryYuki/error-pages/internal/logger"
 )
 
 func TestHandler(t *testing.T) {
@@ -99,14 +99,8 @@ func TestHandler(t *testing.T) {
 			},
 			giveUrl: "http://example.com/503",
 			giveHeaders: map[string]string{
-				"Accept":          "application/json",
-				"X-Original-URI":  "/foo/bar",
-				"X-Namespace":     "some-Namespace",
-				"X-Ingress-Name":  "ingress-name",
-				"X-Service-Name":  "service-name",
-				"X-Service-Port":  "666",
-				"X-Request-ID":    "req-id-777",
-				"X-Forwarded-For": "123.123.123.123:12312",
+				"Accept":       "application/json",
+				"X-Request-ID": "req-id-777",
 			},
 
 			wantStatusCode: http.StatusOK,
@@ -115,13 +109,7 @@ func TestHandler(t *testing.T) {
 				"503",
 				"Service Unavailable",
 				"details",
-				"/foo/bar",
-				"some-Namespace",
-				"ingress-name",
-				"service-name",
-				"666",
 				"req-id-777",
-				"123.123.123.123:12312",
 				"example.com",
 			},
 		},
